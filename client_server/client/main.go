@@ -29,15 +29,16 @@ func (s *simple) HandleInfo(process *gen.ServerProcess, message etf.Term) gen.Se
 func main() {
 
 	// create a new node
-	node, _ := ergo.StartNode("node@localhost", "cookies", node.Options{})
+	node, _ := ergo.StartNode("node@localhost", "123", node.Options{})
 
 	// spawn a new process of gen.Server
 	process, _ := node.Spawn("gs1", gen.ProcessOptions{}, &simple{})
-	// to := gen.ProcessID{Name: "example", Node: "demo@127.0.0.1"}
-	to := gen.ProcessID{Name: "demo@127.0.0.1", Node: "example"}
+	to := gen.ProcessID{Name: "example", Node: "demo@127.0.0.1"}
+	// to := gen.ProcessID{Name: "demo@127.0.0.1", Node: "example"}
 	// process := gen.ServerProcess{}
-	// m := etf.Tuple{string("hello")}
-	err := process.Send(to, "hello")
+	m := etf.Tuple{string("hello")}
+	err := process.Send(to, m)
+
 	fmt.Println(err)
 
 }
